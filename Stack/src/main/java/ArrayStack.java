@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class ArrayStack implements Stack {
 
     private Object[] array;
