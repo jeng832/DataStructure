@@ -12,7 +12,7 @@ public class ArrayStack implements Stack {
 
     @Override
     public int size() {
-        return array.length;
+        return top + 1;
     }
 
     @Override
@@ -22,16 +22,20 @@ public class ArrayStack implements Stack {
 
     @Override
     public Object top() {
+        if (isEmpty()) return null;
         return array[top];
     }
 
     @Override
     public void push(Object element) {
-        array[++top] = element;
+        if (top < array.length - 1) {
+            array[++top] = element;
+        }
     }
 
     @Override
     public Object pop() {
+        if (isEmpty()) return null;
         return array[top--];
     }
 
@@ -48,5 +52,10 @@ public class ArrayStack implements Stack {
         sb.append("]");
 
         return sb.toString();
+    }
+
+    @Override
+    public boolean isFull() {
+        return array.length == size();
     }
 }

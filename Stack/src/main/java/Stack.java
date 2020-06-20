@@ -9,5 +9,7 @@ public interface Stack {
 
     public Object pop();
 
-    String printStack();
+    public String printStack();
+
+    public boolean isFull();
 }
