@@ -4,43 +4,38 @@ public class ArrayQueue implements Queue {
     private int rear;
 
     public ArrayQueue(int size) {
-        this.array = new Object[size];
-        this.front = -1;
-        this.rear = -1;
+        this.array = new Object[size + 1];
+        this.front = 0;
+        this.rear = 0;
     }
 
     @Override
     public int size() {
-        if (front == -1) return 0;
-        int len = array.length - front + rear + 1;
-        if (len % array.length == 0) return array.length;
-        return len % array.length;
+        return (array.length - front + rear) % array.length;
     }
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        return front == rear;
     }
 
     @Override
     public boolean isFull() {
-        return size() == array.length;
+        return size() == array.length - 1;
     }
 
     @Override
     public Object front() {
+        if (isEmpty()) return null;
         return array[front];
     }
 
     @Override
     public void enqueue(Object elem) {
-        if (front == -1) {
-            front = 0;
-            rear = 0;
-        } else if (!isFull()) {
+        if (!isFull()) {
+            array[rear] = elem;
             rear = (rear + 1) % array.length;
         }
-        array[rear] = elem;
     }
 
     @Override
